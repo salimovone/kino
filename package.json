@@ -1,0 +1,22 @@
+{
+  "name": "kino",
+  "version": "1.0.0",
+  "description": "kinolarni qidirish va yuklab olish",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salimovone/kino.git"
+  },
+  "author": "sardor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/salimovone/kino/issues"
+  },
+  "homepage": "https://github.com/salimovone/kino#readme",
+  "dependencies": {
+    "telegraf": "^4.16.3"
+  }
+}
