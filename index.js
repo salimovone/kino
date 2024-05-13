@@ -1,43 +1,53 @@
-import { Telegraf } from "telegraf";
-import { callbackQuery, message } from "telegraf/filters";
+import { Markup, Telegraf } from "telegraf";
+import { message } from "telegraf/filters";
 
-const bot = new Telegraf("7066831640:AAEzqv_wkBARzajt_N-Mv9a4DS_x6uTxY2g")
+const bot = new Telegraf("7066831640:AAEzqv_wkBARzajt_N-Mv9a4DS_x6uTxY2g");
 
-// commandga javob
-bot.command("quit", async (ctx) => {
-    // aniq foydalanish
-    await ctx.telegram.leaveChat(ctx.message.chat.id)
+const sardor = 1179267491;
+const admins = [sardor];
 
-    // context qisqartmasi
-    await ctx.leaveChat()
+bot.command("start", async (ctx) => {
+  //   await ctx.sendAnimation(
+  //     "https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif"
+  //   );
+  await ctx.sendMessage(
+    `Salom ${ctx.message.from.first_name} 🖐 \nFilm nomini yoki kodini kriting✍️`
+  );
+});
+
+bot.command("settings", async (ctx) => {
+  // await ctx.setChatMenuButton("hello menu button")
+  Markup.button.text("salom markup button", false);
+});
+
+
+bot.command("video", (ctx)=>{
+  console.log("maybe it doesn't work");
+  ctx.replyWithVideo({ url: "http://fayllar1.ru/28/kinolar/Godzilla%20minus%201%202024%201080p%20O'zbek%20tilida%20(asilmedia.net).mp4" }, { caption: "movie title" });
 })
 
 bot.on(message("text"), async (ctx) => {
-    // aniq foydalanish
-    await ctx.telegram.sendMessage(ctx.message.chat.id, `Hello ${ctx.state.role}`)
+  if (admins.includes(ctx.chat.id)) {
+    await ctx.reply(`You are admin`);
+  } else {
+    await ctx.reply(`🫡`);
+    await ctx.reply(`Film qidirilmoqda....`);
+  }
+});
 
-    //context qisqartmasi
-    await ctx.reply(`Hello ${ctx.state.role}`)
-})
-
-bot.on(callbackQuery, async ctx=>{
-    await ctx.telegram.answerCbQuery(ctx.callbackQuery.id)
-
-    await ctx.answerCbQuery()
-})
-
-bot.on('inline_query', async (ctx) => {
-    const result = ["inline", "query"]
-    // Explicit usage
-    await ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result)
-  
-    // Using context shortcut
-    await ctx.answerInlineQuery(result)
-  })
-
-  bot.launch()
+// bot.on(message("video"), async (ctx) => {
+//   if (admins.includes(ctx.chat.id)) {
+//     await ctx.reply(`You are admin and you send video message`);
+//   } else {
+//     await ctx.reply(
+//       `This feature available soon but now you can send movie code or name only`
+//     );
+//   }
+// });
 
 
-  // Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+bot.launch();
+
+// Enable graceful stop
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));
