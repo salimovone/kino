@@ -13,12 +13,14 @@ bot.command("start", async (ctx) => {
   await ctx.sendMessage(
     `Salom ${ctx.message.from.first_name} 🖐 \nFilm nomini yoki kodini kriting✍️`
   );
-});
+})
 
 bot.command("settings", async (ctx) => {
   // await ctx.setChatMenuButton("hello menu button")
   Markup.button.text("salom markup button", false);
 });
+
+
 
 
 bot.command("video", (ctx)=>{
